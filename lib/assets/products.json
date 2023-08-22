@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Vito Koltuk Takımı",
+    "image": "lib/assets/image1.png",
+    "normalPrice": 100.0,
+    "discountedPrice": 80.0,
+    "stock": 10
+  },
+  {
+    "name": "Vito Koltuk Kılıfı",
+    "image": "lib/assets/image2.jpeg",
+    "normalPrice": 50.0,
+    "discountedPrice": 40.0,
+    "stock": 5
+  },
+  {
+    "name": "İpek Mobilya Doremi 3 Lü Kanepe ( Gri )",
+    "image": "lib/assets/image3.jpeg",
+    "normalPrice": 5999.0,
+    "discountedPrice": 4999.0,
+    "stock": 8
+  },
+  {
+    "name": "Pafu Sando İkili Katlanır Yataklı Koltuk",
+    "image": "lib/assets/image4.jpeg",
+    "normalPrice": 6599.0,
+    "discountedPrice": 5999.0,
+    "stock": 12
+  },
+  {
+    "name": "Rivolya Lily Model Yataklı 3'lü Premium Koltuk",
+    "image": "lib/assets/image5.jpeg",
+    "normalPrice": 16599.0,
+    "discountedPrice": 15999.0,
+    "stock": 11
+  },
+  {
+    "name": "Evdemo Ada İkili Koltuk Kanepe Gri",
+    "image": "lib/assets/image6.jpeg",
+    "normalPrice": 3599.0,
+    "discountedPrice": 2999.0,
+    "stock": 18
+  },
+  {
+    "name": "Homedius Magic Çift Kişilik Katlanır Yataklı Koltuk - Gri",
+    "image": "lib/assets/image7.jpeg",
+    "normalPrice": 6599.0,
+    "discountedPrice": 5999.0,
+    "stock": 12
+  },
+  {
+    "name": "Homedius Magic Tek Kişilik Katlanır Yataklı Koltuk - Antrasit",
+    "image": "lib/assets/image8.jpeg",
+    "normalPrice": 3599.0,
+    "discountedPrice": 2999.0,
+    "stock": 3
+  },
+  {
+    "name": "Pafu MİSA Üçlü Koltuk - Petrol",
+    "image": "lib/assets/image4.jpeg",
+    "normalPrice": 7599.0,
+    "discountedPrice": 5999.0,
+    "stock": 6
+  },
+  {
+    "name": "Woodesk Arin Masif Tik-Camel Renk Sedir CPT8311-200",
+    "image": "lib/assets/image10.jpeg",
+    "normalPrice": 7599.0,
+    "discountedPrice": 5999.0,
+    "stock": 6
+  }
+]
