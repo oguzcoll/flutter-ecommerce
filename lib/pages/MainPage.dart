@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/pages/CartPage.dart';
 
 import '../widgets/Products.dart';
 
@@ -105,7 +106,10 @@ class _MainPageState extends State<MainPage> {
             color: Colors.brown,
             width: double.infinity,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (ctx) => CartPage()));
+              },
               child: const Text(
                 "Sepete Git",
                 style: TextStyle(
