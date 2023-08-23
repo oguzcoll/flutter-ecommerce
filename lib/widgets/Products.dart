@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/models/product.dart';
 
 class Products extends StatefulWidget {
+  final Product product;
+
+  const Products({super.key, required this.product});
+
   @override
   State<StatefulWidget> createState() {
     return _ProductsState();
@@ -11,6 +16,7 @@ class _ProductsState extends State<Products> {
   int productCount = 0;
   @override
   Widget build(BuildContext context) {
+    final product = widget.product;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -19,7 +25,7 @@ class _ProductsState extends State<Products> {
       child: Column(
         children: [
           Image.asset(
-            'lib/assets/image1.png',
+            product.image,
             height: 90,
             width: 90,
           ),
@@ -27,38 +33,74 @@ class _ProductsState extends State<Products> {
             height: 5,
           ),
           // ürün adı
-          const Text(
-            "Vito Koltuk Takımı",
-            style: TextStyle(
+          Text(
+            product.name,
+            style: const TextStyle(
               color: Colors.red,
               fontWeight: FontWeight.bold,
-              fontSize: 15,
+              fontSize: 12.5,
             ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 5,
           ),
 
           // Normal Fiyatı
-          const Text(
-            "N.fiyatı: 4620.0",
-            style: TextStyle(
-              decoration: TextDecoration.lineThrough,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "N. Fiyatı:",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                " ${product.normalPrice.toStringAsFixed(2)}",
+                style: const TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 5,
           ),
 
-          // Kampanyalı Fiyatı
-          Text("K.fiyatı: 4620.0"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "K.Fiyatı:",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                " ${product.discountedPrice.toStringAsFixed(2)}",
+                // Diğer metinlerde olduğu gibi ihtiyaca göre burada da stillendirme yapabilirsiniz.
+              ),
+            ],
+          ),
           const SizedBox(
             height: 5,
           ),
-          // Stok Sayısı
-          Text("Stok: 3.0"),
-          const SizedBox(
-            height: 5,
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Stok:",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                ' ${product.stock.toStringAsFixed(0)}',
+                // Diğer metinlerde olduğu gibi ihtiyaca göre burada da stillendirme yapabilirsiniz.
+              ),
+            ],
           ),
 
           Row(

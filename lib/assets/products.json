@@ -2,15 +2,15 @@
   {
     "name": "Vito Koltuk Takımı",
     "image": "lib/assets/image1.png",
-    "normalPrice": 100.0,
-    "discountedPrice": 80.0,
+    "normalPrice": 1000.0,
+    "discountedPrice": 800.0,
     "stock": 10
   },
   {
     "name": "Vito Koltuk Kılıfı",
     "image": "lib/assets/image2.jpeg",
-    "normalPrice": 50.0,
-    "discountedPrice": 40.0,
+    "normalPrice": 5487.0,
+    "discountedPrice": 4045.0,
     "stock": 5
   },
   {
@@ -49,7 +49,7 @@
     "stock": 12
   },
   {
-    "name": "Homedius Magic Tek Kişilik Katlanır Yataklı Koltuk - Antrasit",
+    "name": "Homedius Magic Tek Kişilik Katlanır Yataklı Koltuk",
     "image": "lib/assets/image8.jpeg",
     "normalPrice": 3599.0,
     "discountedPrice": 2999.0,
@@ -63,7 +63,7 @@
     "stock": 6
   },
   {
-    "name": "Woodesk Arin Masif Tik-Camel Renk Sedir CPT8311-200",
+    "name": "Woodesk Arin Masif Tik-Camel Renk Sedir",
     "image": "lib/assets/image10.jpeg",
     "normalPrice": 7599.0,
     "discountedPrice": 5999.0,

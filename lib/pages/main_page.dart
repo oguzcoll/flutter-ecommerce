@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hepsiorda/pages/CartPage.dart';
+import 'package:hepsiorda/models/product.dart';
+import 'package:hepsiorda/pages/cart_page.dart';
+import 'package:hepsiorda/utils/json_helper.dart';
 
-import '../widgets/Products.dart';
+import '../widgets/products.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -69,7 +71,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               Container(
-                child: const Icon(Icons.zoom_in),
+                child: Icon(Icons.zoom_in),
                 width: 50,
                 height: 50,
                 color: Colors.grey,
@@ -86,20 +88,36 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 0.7,
-                ),
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return Products();
-                },
-              ),
+            child: FutureBuilder<List<Product>>(
+              future: fetchProducts(context),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text(
+                      'Veriler yüklenirken bir hata oluştu: ${snapshot.error}');
+                } else {
+                  final List<Product>? products = snapshot.data;
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 0.7,
+                    ),
+                    itemCount: products?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      final product = products![index];
+                      // Burada ürün bilgilerini kullanarak bir widget oluşturabilirsiniz.
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Products(product: product),
+                      );
+                    },
+                  );
+                }
+              },
             ),
           ),
           Container(
