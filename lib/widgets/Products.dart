@@ -157,9 +157,11 @@ class _ProductsState extends State<Products> {
                 child: Container(
                   width: 53,
                   height: 40,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: widget.product.count < widget.product.stock
+                        ? Colors.white
+                        : const Color.fromARGB(255, 215, 214, 214),
+                    borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(6),
                       bottomRight: Radius.circular(6),
                     ),

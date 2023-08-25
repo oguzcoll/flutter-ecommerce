@@ -89,7 +89,7 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "Toplam Fiyat",
+                    "Toplam Fiyatı",
                     style: TextStyle(fontSize: 15),
                   ),
                 ),
@@ -125,7 +125,7 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "Toplam İndirimli Fiyat",
+                    "Toplam İndirim Fiyatı",
                     style: TextStyle(fontSize: 15),
                   ),
                 ),

@@ -17,15 +17,16 @@ class CartItem extends StatefulWidget {
 }
 
 class _CartItemState extends State<CartItem> {
-  int _itemCount; // Remove the late modifier
+  int _itemCount;
+  late int _maxItemCount; // Add this variable
 
-  // Constructor to initialize _itemCount
   _CartItemState() : _itemCount = 0; // Initialize _itemCount to 0
 
   @override
   void initState() {
     super.initState();
     _itemCount = widget.initialItemCount;
+    _maxItemCount = widget.item.stock; // Initialize _maxItemCount
   }
 
   @override
@@ -112,7 +113,9 @@ class _CartItemState extends State<CartItem> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    _itemCount++;
+                    if (_itemCount < _maxItemCount) {
+                      _itemCount++;
+                    }
                   });
                 },
                 child: Container(
