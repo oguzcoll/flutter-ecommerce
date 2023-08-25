@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/models/product.dart';
 
 class CartItem extends StatefulWidget {
-  const CartItem({super.key});
+  final Product item;
+  final int initialItemCount;
 
+  const CartItem({
+    Key? key,
+    required this.item,
+    required this.initialItemCount, // Add this parameter
+  }) : super(key: key);
   @override
   State<CartItem> createState() {
     return _CartItemState();
@@ -10,10 +17,20 @@ class CartItem extends StatefulWidget {
 }
 
 class _CartItemState extends State<CartItem> {
-  int itemCount = 1; // Öğenin varsayılan sayısı
+  int _itemCount; // Remove the late modifier
+
+  // Constructor to initialize _itemCount
+  _CartItemState() : _itemCount = 0; // Initialize _itemCount to 0
+
+  @override
+  void initState() {
+    super.initState();
+    _itemCount = widget.initialItemCount;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final item = widget.item;
     return Container(
       margin: EdgeInsets.all(2),
       padding: EdgeInsets.all(2),
@@ -21,24 +38,25 @@ class _CartItemState extends State<CartItem> {
         elevation: 5,
         color: Colors.white,
         child: ListTile(
-          leading: Image.asset('lib/assets/image1.png', height: 80, width: 80),
-          title: const Column(
+          leading: Image.asset(item.image, height: 80, width: 80),
+          title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Vito Koltuk Takımı", // Ürün adı
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                item.name, // Ürün adı
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               Text(
-                "N.F: 4620.0",
-                style: TextStyle(
+                "N.F: ${widget.item.normalPrice.toStringAsFixed(2)}",
+                style: const TextStyle(
                   fontSize: 14,
                   decoration: TextDecoration.lineThrough,
                 ),
               ), // Normal fiyatı
               Text(
-                "K.F: 4620.0",
-                style: TextStyle(fontSize: 14),
+                "K.F: ${widget.item.discountedPrice.toStringAsFixed(2)}",
+                style: const TextStyle(fontSize: 14),
               ), // Kampanyalı fiyatı
             ],
           ),
@@ -48,8 +66,8 @@ class _CartItemState extends State<CartItem> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    if (itemCount > 1) {
-                      itemCount--;
+                    if (_itemCount > 1) {
+                      _itemCount--;
                     }
                   });
                 },
@@ -82,7 +100,7 @@ class _CartItemState extends State<CartItem> {
                 ),
                 child: Center(
                   child: Text(
-                    itemCount.toString(), // Ürün sayısı
+                    _itemCount.toString(), // Ürün sayısı
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -94,7 +112,7 @@ class _CartItemState extends State<CartItem> {
               InkWell(
                 onTap: () {
                   setState(() {
-                    itemCount++;
+                    _itemCount++;
                   });
                 },
                 child: Container(

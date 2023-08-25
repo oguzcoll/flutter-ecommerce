@@ -4,69 +4,79 @@
     "image": "lib/assets/image1.png",
     "normalPrice": 1000.0,
     "discountedPrice": 800.0,
-    "stock": 10
+    "stock": 10,
+    "count": 0
   },
   {
     "name": "Vito Koltuk Kılıfı",
     "image": "lib/assets/image2.jpeg",
     "normalPrice": 5487.0,
     "discountedPrice": 4045.0,
-    "stock": 5
+    "stock": 5,
+    "count": 0
   },
   {
-    "name": "İpek Mobilya Doremi 3 Lü Kanepe ( Gri )",
+    "name": "İpek Mobilya  3 Lü Kanepe",
     "image": "lib/assets/image3.jpeg",
     "normalPrice": 5999.0,
     "discountedPrice": 4999.0,
-    "stock": 8
+    "stock": 8,
+    "count": 0
   },
   {
-    "name": "Pafu Sando İkili Katlanır Yataklı Koltuk",
+    "name": "Pafu Sando Yataklı Koltuk",
     "image": "lib/assets/image4.jpeg",
     "normalPrice": 6599.0,
     "discountedPrice": 5999.0,
-    "stock": 12
+    "stock": 12,
+    "count": 0
   },
   {
     "name": "Rivolya Lily Model Yataklı 3'lü Premium Koltuk",
     "image": "lib/assets/image5.jpeg",
     "normalPrice": 16599.0,
     "discountedPrice": 15999.0,
-    "stock": 11
+    "stock": 11,
+    "count": 0
   },
   {
     "name": "Evdemo Ada İkili Koltuk Kanepe Gri",
     "image": "lib/assets/image6.jpeg",
     "normalPrice": 3599.0,
     "discountedPrice": 2999.0,
-    "stock": 18
+    "stock": 18,
+    "count": 0
   },
   {
     "name": "Homedius Magic Çift Kişilik Katlanır Yataklı Koltuk - Gri",
     "image": "lib/assets/image7.jpeg",
     "normalPrice": 6599.0,
     "discountedPrice": 5999.0,
-    "stock": 12
+    "stock": 12,
+    "count": 0
   },
   {
     "name": "Homedius Magic Tek Kişilik Katlanır Yataklı Koltuk",
     "image": "lib/assets/image8.jpeg",
     "normalPrice": 3599.0,
     "discountedPrice": 2999.0,
-    "stock": 3
+    "stock": 3,
+    "count": 0
   },
   {
     "name": "Pafu MİSA Üçlü Koltuk - Petrol",
     "image": "lib/assets/image4.jpeg",
     "normalPrice": 7599.0,
     "discountedPrice": 5999.0,
-    "stock": 6
+    "stock": 6,
+    "count": 0
   },
   {
     "name": "Woodesk Arin Masif Tik-Camel Renk Sedir",
     "image": "lib/assets/image10.jpeg",
     "normalPrice": 7599.0,
     "discountedPrice": 5999.0,
-    "stock": 6
+    "stock": 5,
+    "count": 0
   }
 ]

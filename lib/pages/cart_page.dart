@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/models/product.dart';
 import 'package:hepsiorda/widgets/cart_item.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final List<Product> cartItems;
+  const CartPage({super.key, required this.cartItems});
 
   @override
   State<CartPage> createState() {
@@ -13,6 +15,7 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
+    final cartItems = widget.cartItems;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 239, 242, 242),
       appBar: AppBar(
@@ -53,9 +56,13 @@ class _CartPageState extends State<CartPage> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: 500,
+              itemCount: cartItems.length,
               itemBuilder: (context, index) {
-                return CartItem();
+                final cartItem = cartItems[index];
+                return CartItem(
+                  item: cartItem,
+                  initialItemCount: cartItem.count,
+                );
               },
             ),
           ),

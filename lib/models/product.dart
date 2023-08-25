@@ -5,6 +5,7 @@ class Product {
   final double normalPrice;
   final double discountedPrice;
   final int stock;
+  int count;
 
   Product({
     required this.name,
@@ -12,5 +13,6 @@ class Product {
     required this.normalPrice,
     required this.discountedPrice,
     required this.stock,
+    this.count = 0,
   });
 }

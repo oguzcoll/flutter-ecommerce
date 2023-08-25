@@ -15,6 +15,25 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  List<Product> cartItems = [];
+
+  addToCart(Product product) {
+    final index = cartItems.indexWhere((item) => item.name == product.name);
+    if (index != -1) {
+      cartItems[index].count++;
+    } else {
+      final clonedProduct = Product(
+        name: product.name,
+        image: product.image,
+        normalPrice: product.normalPrice,
+        discountedPrice: product.discountedPrice,
+        stock: product.stock,
+        count: 1, // Set count to 1 for a new product.
+      );
+      cartItems.add(clonedProduct);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +111,7 @@ class _MainPageState extends State<MainPage> {
               future: fetchProducts(context),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text(
                       'Veriler yüklenirken bir hata oluştu: ${snapshot.error}');
@@ -109,10 +128,13 @@ class _MainPageState extends State<MainPage> {
                     itemCount: products?.length ?? 0,
                     itemBuilder: (context, index) {
                       final product = products![index];
-                      // Burada ürün bilgilerini kullanarak bir widget oluşturabilirsiniz.
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Products(product: product),
+                        child: Products(
+                          key: Key(product.name),
+                          product: product,
+                          addToCart: () => addToCart(product),
+                        ),
                       );
                     },
                   );
@@ -125,8 +147,13 @@ class _MainPageState extends State<MainPage> {
             width: double.infinity,
             child: TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => CartPage()));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => CartPage(
+                      cartItems: cartItems,
+                    ),
+                  ),
+                );
               },
               child: const Text(
                 "Sepete Git",

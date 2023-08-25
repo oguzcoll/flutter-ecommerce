@@ -3,38 +3,47 @@ import 'package:hepsiorda/models/product.dart';
 
 class Products extends StatefulWidget {
   final Product product;
+  final Function() addToCart;
+  final Key key;
 
-  const Products({super.key, required this.product});
+  const Products(
+      {required this.key, required this.product, required this.addToCart});
 
   @override
-  State<StatefulWidget> createState() {
-    return _ProductsState();
-  }
+  State<Products> createState() => _ProductsState();
 }
 
 class _ProductsState extends State<Products> {
-  int productCount = 0;
   @override
   Widget build(BuildContext context) {
-    final product = widget.product;
+    void increaseCount() {
+      if (widget.product.count < widget.product.stock) {
+        setState(() {
+          widget.product.count++;
+        });
+        widget.addToCart();
+      }
+    }
+
     return Container(
+      key: widget.key,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          color: Color.fromARGB(149, 244, 239, 239),
-          border: Border.all(color: Colors.white, width: 2)),
+        borderRadius: BorderRadius.circular(16),
+        color: const Color.fromARGB(149, 244, 239, 239),
+        border: Border.all(color: Colors.white, width: 2),
+      ),
       child: Column(
         children: [
           Image.asset(
-            product.image,
+            widget.product.image,
             height: 90,
             width: 90,
           ),
           const SizedBox(
             height: 5,
           ),
-          // ürün adı
           Text(
-            product.name,
+            widget.product.name,
             style: const TextStyle(
               color: Colors.red,
               fontWeight: FontWeight.bold,
@@ -45,8 +54,6 @@ class _ProductsState extends State<Products> {
           const SizedBox(
             height: 5,
           ),
-
-          // Normal Fiyatı
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -57,7 +64,7 @@ class _ProductsState extends State<Products> {
                 ),
               ),
               Text(
-                " ${product.normalPrice.toStringAsFixed(2)}",
+                " ${widget.product.normalPrice.toStringAsFixed(2)}",
                 style: const TextStyle(
                   decoration: TextDecoration.lineThrough,
                 ),
@@ -67,7 +74,6 @@ class _ProductsState extends State<Products> {
           const SizedBox(
             height: 5,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -78,15 +84,13 @@ class _ProductsState extends State<Products> {
                 ),
               ),
               Text(
-                " ${product.discountedPrice.toStringAsFixed(2)}",
-                // Diğer metinlerde olduğu gibi ihtiyaca göre burada da stillendirme yapabilirsiniz.
+                " ${widget.product.discountedPrice.toStringAsFixed(2)}",
               ),
             ],
           ),
           const SizedBox(
             height: 5,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -97,20 +101,18 @@ class _ProductsState extends State<Products> {
                 ),
               ),
               Text(
-                ' ${product.stock.toStringAsFixed(0)}',
-                // Diğer metinlerde olduğu gibi ihtiyaca göre burada da stillendirme yapabilirsiniz.
+                ' ${widget.product.stock.toStringAsFixed(0)}',
               ),
             ],
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               InkWell(
                 onTap: () {
                   setState(() {
-                    if (productCount > 0) {
-                      productCount--;
+                    if (widget.product.count > 0) {
+                      widget.product.count--;
                     }
                   });
                 },
@@ -142,7 +144,7 @@ class _ProductsState extends State<Products> {
                 color: Color.fromARGB(255, 204, 206, 208),
                 child: Center(
                   child: Text(
-                    productCount.toString(),
+                    widget.product.count.toString(),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -151,11 +153,7 @@ class _ProductsState extends State<Products> {
                 ),
               ),
               InkWell(
-                onTap: () {
-                  setState(() {
-                    productCount++;
-                  });
-                },
+                onTap: increaseCount,
                 child: Container(
                   width: 53,
                   height: 40,
