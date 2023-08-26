@@ -6,13 +6,14 @@ import 'package:provider/provider.dart';
 class CartItem extends StatefulWidget {
   final Product item;
   final int initialItemCount;
-  final Function(int) onItemCountChanged; // Add this parameter
-
+  final Function(int) onItemCountChanged;
+  final Function() onItemRemoved;
   const CartItem({
     Key? key,
     required this.item,
-    required this.initialItemCount, // Add this parameter
-    required this.onItemCountChanged, // Add this parameter
+    required this.initialItemCount,
+    required this.onItemCountChanged,
+    required this.onItemRemoved,
   }) : super(key: key);
   @override
   State<CartItem> createState() {
@@ -81,6 +82,8 @@ class _CartItemState extends State<CartItem> {
                       if (_itemCount > 1) {
                         _itemCount--;
                         widget.onItemCountChanged(_itemCount); // Notify parent
+                      } else {
+                        widget.onItemRemoved();
                       }
                     });
                     cartProvider.updateCartItem(widget.item, _itemCount);
@@ -137,7 +140,9 @@ class _CartItemState extends State<CartItem> {
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 249, 244, 244),
+                      color: widget.item.count < widget.item.stock
+                          ? Colors.white
+                          : const Color.fromARGB(255, 215, 214, 214),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Center(

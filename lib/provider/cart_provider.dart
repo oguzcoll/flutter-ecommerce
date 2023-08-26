@@ -29,4 +29,9 @@ class CartProvider extends ChangeNotifier {
       notifyListeners(); // Notify listeners when the cart item count is updated.
     }
   }
+
+  void removeFromCart(Product product) {
+    cartItems.removeWhere((item) => item.name == product.name);
+    notifyListeners();
+  }
 }

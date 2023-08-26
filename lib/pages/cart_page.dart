@@ -80,6 +80,11 @@ class _CartPageState extends State<CartPage> {
                     onItemCountChanged: (newCount) {
                       updateCartItem(cartItem, newCount);
                     },
+                    onItemRemoved: () {
+                      // it remove the item from the cart when number of the produc is zero
+                      Provider.of<CartProvider>(context, listen: false)
+                          .removeFromCart(cartItem);
+                    },
                   );
                 },
               );
