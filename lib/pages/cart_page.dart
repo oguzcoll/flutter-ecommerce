@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/models/product.dart';
 import 'package:hepsiorda/widgets/cart_item.dart';
+import 'package:provider/provider.dart';
+import '../provider/cart_provider.dart';
 
 class CartPage extends StatefulWidget {
   final List<Product> cartItems;
-  const CartPage({super.key, required this.cartItems});
+  final void Function(Product, int) updateCartItem;
+  const CartPage({
+    super.key,
+    required this.cartItems,
+    required this.updateCartItem,
+  });
 
   @override
   State<CartPage> createState() {
@@ -13,6 +20,11 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  void updateCartItem(Product product, int newCount) {
+    Provider.of<CartProvider>(context, listen: false)
+        .updateCartItem(product, newCount);
+  }
+
   @override
   Widget build(BuildContext context) {
     final cartItems = widget.cartItems;
@@ -55,16 +67,23 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: cartItems.length,
-              itemBuilder: (context, index) {
-                final cartItem = cartItems[index];
-                return CartItem(
-                  item: cartItem,
-                  initialItemCount: cartItem.count,
-                );
-              },
-            ),
+            child:
+                Consumer<CartProvider>(builder: (context, cartProvider, child) {
+              final cartItems = cartProvider.cartItems;
+              return ListView.builder(
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  final cartItem = cartItems[index];
+                  return CartItem(
+                    item: cartItem,
+                    initialItemCount: cartItem.count,
+                    onItemCountChanged: (newCount) {
+                      updateCartItem(cartItem, newCount);
+                    },
+                  );
+                },
+              );
+            }),
           ),
           TextField(),
           // Toplam Fiyat

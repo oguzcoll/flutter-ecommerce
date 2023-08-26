@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/pages/main_page.dart';
+import 'package:hepsiorda/provider/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CartProvider(), // Create an instance of CartProvider
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
