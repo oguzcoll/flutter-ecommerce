@@ -44,6 +44,29 @@ class _CartItemState extends State<CartItem> {
             orElse: () => widget.item,
           )
           .count;
+
+      void decreaseCountFromCart() {
+        setState(() {
+          if (_itemCount > 1) {
+            _itemCount--;
+            widget.onItemCountChanged(_itemCount);
+          } else {
+            widget.onItemRemoved();
+          }
+        });
+        cartProvider.updateCartItem(widget.item, _itemCount);
+      }
+
+      void increaseCountFromCart() {
+        setState(() {
+          if (_itemCount < _maxItemCount) {
+            _itemCount++;
+            widget.onItemCountChanged(_itemCount);
+          }
+        });
+        cartProvider.updateCartItem(widget.item, _itemCount);
+      }
+
       return Container(
         margin: EdgeInsets.all(2),
         padding: EdgeInsets.all(2),
@@ -77,17 +100,7 @@ class _CartItemState extends State<CartItem> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (_itemCount > 1) {
-                        _itemCount--;
-                        widget.onItemCountChanged(_itemCount); // Notify parent
-                      } else {
-                        widget.onItemRemoved();
-                      }
-                    });
-                    cartProvider.updateCartItem(widget.item, _itemCount);
-                  },
+                  onTap: decreaseCountFromCart,
                   child: Container(
                     width: 30,
                     height: 30,
@@ -127,15 +140,7 @@ class _CartItemState extends State<CartItem> {
                 ),
                 const SizedBox(width: 10),
                 InkWell(
-                  onTap: () {
-                    setState(() {
-                      if (_itemCount < _maxItemCount) {
-                        _itemCount++;
-                        widget.onItemCountChanged(_itemCount); // Notify parent
-                      }
-                    });
-                    cartProvider.updateCartItem(widget.item, _itemCount);
-                  },
+                  onTap: increaseCountFromCart,
                   child: Container(
                     width: 30,
                     height: 30,

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => CartProvider(), // Create an instance of CartProvider
+      create: (_) => CartProvider(),
       child: const MyApp(),
     ),
   );

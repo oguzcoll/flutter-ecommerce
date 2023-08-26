@@ -8,7 +8,7 @@ Future<List<Product>> fetchProducts(BuildContext context) async {
       .loadString('lib/assets/products.json');
   final List<dynamic> data = json.decode(jsonData);
 
-  // JSON verilerini Product sınıfına dönüştürün
+  // JSON verileri Product sınıfına dönüştü
   final List<Product> products = data
       .map((json) => Product(
             name: json['name'],

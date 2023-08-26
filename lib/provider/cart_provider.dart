@@ -34,4 +34,24 @@ class CartProvider extends ChangeNotifier {
     cartItems.removeWhere((item) => item.name == product.name);
     notifyListeners();
   }
+
+  double getTotalPrice() {
+    double totalPrice = 0;
+    for (final item in cartItems) {
+      totalPrice += item.normalPrice * item.count;
+    }
+    return totalPrice;
+  }
+
+  double getTotalDiscountPrice() {
+    double totalDiscountPrice = 0;
+    for (final item in cartItems) {
+      totalDiscountPrice += item.discountedPrice * item.count;
+    }
+    return totalDiscountPrice;
+  }
+
+  double getGeneralPrice() {
+    return getTotalPrice() - getTotalDiscountPrice();
+  }
 }

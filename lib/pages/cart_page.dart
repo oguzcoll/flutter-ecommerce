@@ -3,6 +3,7 @@ import 'package:hepsiorda/models/product.dart';
 import 'package:hepsiorda/widgets/cart_item.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart_provider.dart';
+import 'package:intl/intl.dart';
 
 class CartPage extends StatefulWidget {
   final List<Product> cartItems;
@@ -28,6 +29,22 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     final cartItems = widget.cartItems;
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    // change format of the prices
+    final totalPrice = cartProvider.getTotalPrice();
+    final totalPriceFormatted =
+        NumberFormat.currency(locale: 'en_US', symbol: '').format(totalPrice);
+
+    final totalDiscountPrice = cartProvider.getTotalDiscountPrice();
+    final totalDiscountPriceFormatted =
+        NumberFormat.currency(locale: 'en_US', symbol: '')
+            .format(totalDiscountPrice);
+
+    final generalPrice = cartProvider.getGeneralPrice();
+    final generalPriceFormatted =
+        NumberFormat.currency(locale: 'en_US', symbol: '').format(generalPrice);
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 239, 242, 242),
       appBar: AppBar(
@@ -95,22 +112,23 @@ class _CartPageState extends State<CartPage> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.white, // Arka plan rengi
+              color: Colors.white,
               border: Border.all(
-                  color: Color.fromARGB(255, 170, 168, 168)), // Border rengi
+                color: Color.fromARGB(255, 170, 168, 168),
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Gölge rengi
+                  color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // Gölge konumu
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     "Toplam Fiyatı",
@@ -120,8 +138,8 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8),
                   child: Text(
-                    "41.930,00 TL",
-                    style: TextStyle(fontSize: 17),
+                    "$totalPriceFormatted TL",
+                    style: const TextStyle(fontSize: 17),
                   ),
                 ),
               ],
@@ -131,22 +149,21 @@ class _CartPageState extends State<CartPage> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.white, // Arka plan rengi
-              border: Border.all(
-                  color: Color.fromARGB(255, 170, 168, 168)), // Border rengi
+              color: Colors.white,
+              border: Border.all(color: Color.fromARGB(255, 170, 168, 168)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5), // Gölge rengi
+                  color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3), // Gölge konumu
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     "Toplam İndirim Fiyatı",
@@ -156,8 +173,8 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "29.351,00 TL",
-                    style: TextStyle(fontSize: 17),
+                    "$totalDiscountPriceFormatted TL",
+                    style: const TextStyle(fontSize: 17),
                   ),
                 ),
               ],
@@ -167,10 +184,10 @@ class _CartPageState extends State<CartPage> {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5), color: Colors.brown),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     "Genel Toplam",
@@ -180,8 +197,8 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "2249.99 TL",
-                    style: TextStyle(
+                    "$generalPriceFormatted TL",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 23,
                       fontWeight: FontWeight.bold,

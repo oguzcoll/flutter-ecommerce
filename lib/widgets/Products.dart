@@ -7,13 +7,13 @@ class Products extends StatefulWidget {
   final Product product;
   final Function() addToCart;
   final Key key;
-  final int cartItemCount; // Add this parameter
+  final int cartItemCount;
 
   const Products({
     required this.key,
     required this.product,
     required this.addToCart,
-    required this.cartItemCount, // Add this parameter
+    required this.cartItemCount,
   });
 
   @override
@@ -25,7 +25,7 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     void increaseCount() {
       if (widget.cartItemCount < widget.product.stock) {
-        widget.addToCart(); // Call addToCart directly
+        widget.addToCart();
       }
     }
 
