@@ -47,32 +47,32 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 239, 242, 242),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 233, 238, 239),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.home,
-            size: 40,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: Text(
-              "GULSOY.HOME",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ],
-      ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(
+                    Icons.home,
+                    size: 40,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                const Text(
+                  "GULSOY.HOME",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
           const Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -98,7 +98,7 @@ class _CartPageState extends State<CartPage> {
                       updateCartItem(cartItem, newCount);
                     },
                     onItemRemoved: () {
-                      // it remove the item from the cart when number of the produc is zero
+                      // it removes the item from the cart when the number of the product is zero
                       Provider.of<CartProvider>(context, listen: false)
                           .removeFromCart(cartItem);
                     },
@@ -229,7 +229,6 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
           // Row -> sipariş ekle / sipariş ekle ve onayla
-
           Row(
             children: [
               Expanded(
