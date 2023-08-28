@@ -85,24 +85,27 @@ class _MainPageState extends State<MainPage> {
               const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.home,
-                        size: _iconSize(context),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 19),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.home,
+                          size: _iconSize(context),
+                        ),
+                        onPressed: () {},
                       ),
-                      onPressed: () {},
-                    ),
-                    const Spacer(),
-                    Text(
-                      "GULSOY.HOME",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _titleFontSize(context),
+                      const Spacer(),
+                      Text(
+                        "GULSOY.HOME",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: _titleFontSize(context),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Align(
