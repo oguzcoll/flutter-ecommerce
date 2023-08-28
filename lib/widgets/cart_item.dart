@@ -74,7 +74,12 @@ class _CartItemState extends State<CartItem> {
           elevation: 5,
           color: Colors.white,
           child: ListTile(
-            leading: Image.asset(item.image, height: 80, width: 80),
+            leading: Image.asset(
+              item.image,
+              height: MediaQuery.of(context).size.height *
+                  0.2, // Adjust based on screen size
+              width: MediaQuery.of(context).size.width * 0.2,
+            ), // Adjust based on screen size),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

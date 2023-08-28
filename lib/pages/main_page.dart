@@ -19,6 +19,32 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    int _getCrossAxisCount(BuildContext context) {
+      double screenWidth = MediaQuery.of(context).size.width;
+
+      if (screenWidth <= 700) {
+        return 2; // For screens less than or equal to 700px, show 2 items side by side.
+      } else if (screenWidth <= 1000) {
+        return 3; // For screens between 701px and 1000px, show 3 items side by side.
+      } else if (screenWidth <= 1491) {
+        return 4;
+      } else {
+        return 5;
+      }
+    }
+
+    double _getChildAspectRatio(BuildContext context) {
+      double screenWidth = MediaQuery.of(context).size.width;
+
+      if (screenWidth <= 600) {
+        return 0.7; // Aspect ratio for screens less than or equal to 700px.
+      } else if (screenWidth <= 1830) {
+        return 0.6; // Aspect ratio for screens between 701px and 1830px.
+      } else {
+        return 0.5; // Increase the aspect ratio for screens wider than 1830px.
+      }
+    }
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 233, 238, 239),
       appBar: AppBar(
@@ -103,12 +129,11 @@ class _MainPageState extends State<MainPage> {
                   return Consumer<CartProvider>(
                       builder: (context, cartProvider, child) {
                     return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: _getCrossAxisCount(context),
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 0.7,
+                        childAspectRatio: _getChildAspectRatio(context),
                       ),
                       itemCount: products?.length ?? 0,
                       itemBuilder: (context, index) {

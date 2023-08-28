@@ -173,7 +173,7 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "$totalDiscountPriceFormatted TL",
+                    "$generalPriceFormatted TL",
                     style: const TextStyle(fontSize: 17),
                   ),
                 ),
@@ -197,7 +197,7 @@ class _CartPageState extends State<CartPage> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    "$generalPriceFormatted TL",
+                    "$totalDiscountPriceFormatted TL",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 23,
