@@ -11,7 +11,7 @@ class CartProvider extends ChangeNotifier {
     } else {
       final clonedProduct = Product(
         name: product.name,
-        image: product.image,
+        images: List<String>.from(product.images),
         normalPrice: product.normalPrice,
         discountedPrice: product.discountedPrice,
         stock: product.stock,

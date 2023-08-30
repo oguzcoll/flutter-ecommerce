@@ -9,15 +9,18 @@ Future<List<Product>> fetchProducts(BuildContext context) async {
   final List<dynamic> data = json.decode(jsonData);
 
   // JSON verileri Product sınıfına dönüştü
-  final List<Product> products = data
-      .map((json) => Product(
-            name: json['name'],
-            image: json['image'],
-            normalPrice: json['normalPrice'],
-            discountedPrice: json['discountedPrice'],
-            stock: json['stock'],
-          ))
-      .toList();
+  final List<Product> products = data.map((json) {
+    final List<String> images = (json['images'] as List).cast<
+        String>(); // Assuming 'images' is the key for the list of image URLs.
+
+    return Product(
+      name: json['name'],
+      images: images, // Update 'image' to 'images' to store multiple URLs.
+      normalPrice: json['normalPrice'],
+      discountedPrice: json['discountedPrice'],
+      stock: json['stock'],
+    );
+  }).toList();
 
   return products;
 }

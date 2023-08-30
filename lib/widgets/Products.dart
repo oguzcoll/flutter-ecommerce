@@ -21,6 +21,7 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     void increaseCount() {
@@ -31,6 +32,8 @@ class _ProductsState extends State<Products> {
 
     return LayoutBuilder(builder: (context, constraints) {
       final scalingFactor = constraints.maxWidth / 240.0;
+      final pageViewAspectRatio = 16.0 / 9.0; // Set your desire aspect ratio
+
       return Consumer<CartProvider>(builder: (context, cartProvider, child) {
         return Container(
           key: widget.key,
@@ -41,12 +44,24 @@ class _ProductsState extends State<Products> {
           ),
           child: Column(
             children: [
-              FractionallySizedBox(
-                widthFactor: 0.7 * scalingFactor,
-                child: Image.asset(
-                  widget.product.image,
-                  fit: BoxFit.fitWidth,
-                ),
+              AspectRatio(
+                aspectRatio: pageViewAspectRatio,
+                child: PageView.builder(
+                    itemCount: widget.product.images.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentIndex = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return FractionallySizedBox(
+                        widthFactor: 0.7 * scalingFactor,
+                        child: Image.asset(
+                          widget.product.images[index],
+                          fit: BoxFit.fitWidth,
+                        ),
+                      );
+                    }),
               ),
               const SizedBox(
                 height: 5,

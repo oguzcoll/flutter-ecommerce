@@ -75,7 +75,9 @@ class _CartItemState extends State<CartItem> {
           color: Colors.white,
           child: ListTile(
             leading: Image.asset(
-              item.image,
+              item.images.isNotEmpty
+                  ? item.images[0]
+                  : 'placeholder_image.png', // Use a placeholder image if the list is empty
               height: MediaQuery.of(context).size.height *
                   0.2, // Adjust based on screen size
               width: MediaQuery.of(context).size.width * 0.2,
