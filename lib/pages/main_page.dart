@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/pages/home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:hepsiorda/models/product.dart';
 import 'package:hepsiorda/pages/cart_page.dart';
@@ -94,7 +95,10 @@ class _MainPageState extends State<MainPage> {
                           Icons.home,
                           size: _iconSize(context),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              MaterialPageRoute(builder: (ctx) => HomePage()));
+                        },
                       ),
                       const Spacer(),
                       Text(

@@ -37,6 +37,7 @@ dependencies:
   riverpod: ^2.3.7
   provider: ^6.0.5
   intl: ^0.18.1
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

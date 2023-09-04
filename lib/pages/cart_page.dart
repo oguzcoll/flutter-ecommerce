@@ -397,7 +397,7 @@ class _CartPageState extends State<CartPage> {
                               "$totalDiscountPriceFormatted TL",
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 15,
+                                fontSize: 19,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/pages/home_page.dart';
 import 'package:hepsiorda/pages/main_page.dart';
 import 'package:hepsiorda/provider/cart_provider.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: MainPage(),
+      home: HomePage(),
     );
   }
 }
