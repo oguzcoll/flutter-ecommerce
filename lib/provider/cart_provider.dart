@@ -54,4 +54,14 @@ class CartProvider extends ChangeNotifier {
   double getGeneralPrice() {
     return getTotalPrice() - getTotalDiscountPrice();
   }
+
+// Add a new field to store selected products
+  List<Product> selectedProducts = [];
+
+  // Method to add selected products to the order
+  void addSelectedProducts(List<Product> products) {
+    selectedProducts.clear();
+    selectedProducts.addAll(products);
+    notifyListeners();
+  }
 }

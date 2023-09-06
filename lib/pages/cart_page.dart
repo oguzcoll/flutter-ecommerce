@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/models/product.dart';
+import 'package:hepsiorda/pages/order_detail_page.dart';
 import 'package:hepsiorda/widgets/cart_item.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart_provider.dart';
@@ -59,7 +60,7 @@ class _CartPageState extends State<CartPage> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(18.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -437,7 +438,15 @@ class _CartPageState extends State<CartPage> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                final selectedProducts =
+                                    List<Product>.from(cartItems);
+                                cartProvider
+                                    .addSelectedProducts(selectedProducts);
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => OrderDetailScreen(),
+                                ));
+                              },
                             ),
                           ),
                         ),

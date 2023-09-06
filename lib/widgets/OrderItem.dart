@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hepsiorda/pages/order_detail_page.dart';
 import 'package:hepsiorda/pages/pending_order_page.dart';
+import 'package:hepsiorda/utils/order_data_list.dart';
 
 class OrderItem extends StatefulWidget {
   final OrderData customerData;
@@ -52,8 +54,13 @@ class _OrderItemState extends State<OrderItem> {
               ],
             ),
             ElevatedButton(
-              onPressed: () {},
-              child: Text("incele"),
+              onPressed: () {
+                if (widget.customerData == orderDataList.first) {
+                  // Navigate to OrderDetailScreen only for the first customer
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => OrderDetailScreen()));
+                }
+              },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.grey),
@@ -64,10 +71,10 @@ class _OrderItemState extends State<OrderItem> {
                   ),
                 ),
               ),
+              child: const Text("İncele"),
             ),
             ElevatedButton(
               onPressed: () {},
-              child: Text("Sipariş"),
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                 backgroundColor: MaterialStateProperty.all<Color>(Colors.brown),
@@ -78,6 +85,7 @@ class _OrderItemState extends State<OrderItem> {
                   ),
                 ),
               ),
+              child: Text("Sipariş"),
             ),
           ],
         ),
