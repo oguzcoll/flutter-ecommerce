@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/models/product.dart';
-import 'package:hepsiorda/pages/order_detail_page.dart';
+import 'package:hepsiorda/pages/home_page.dart';
+
 import 'package:hepsiorda/widgets/cart_item.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart_provider.dart';
@@ -22,6 +23,9 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  TextEditingController discountController = TextEditingController();
+  double discountPercentage = 0.0; // Initial discount percentage is 0.
+
   void updateCartItem(Product product, int newCount) {
     Provider.of<CartProvider>(context, listen: false)
         .updateCartItem(product, newCount);
@@ -118,7 +122,20 @@ class _CartPageState extends State<CartPage> {
                     );
                   }),
                 ),
-                TextField(),
+                TextField(
+                  controller: discountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    hintText: 'İskonto',
+                  ),
+                  onChanged: (discountValue) {
+                    setState(() {
+                      discountPercentage =
+                          double.tryParse(discountValue) ?? 0.0;
+                      cartProvider.setDiscountPercentage(discountPercentage);
+                    });
+                  },
+                ),
                 if (MediaQuery.of(context).orientation == Orientation.landscape)
 
                   // Define a maximum width for the price containers
@@ -193,14 +210,14 @@ class _CartPageState extends State<CartPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      "Toplam İndirim Fiyatı",
+                                      "Toplam Kampanyalı Fiyatı",
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      "$generalPriceFormatted TL",
+                                      "$totalDiscountPriceFormatted TL",
                                       style: const TextStyle(fontSize: 14),
                                     ),
                                   ),
@@ -223,7 +240,7 @@ class _CartPageState extends State<CartPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      "Genel Toplam",
+                                      "İskontolu Fiyat",
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 14),
                                     ),
@@ -231,7 +248,13 @@ class _CartPageState extends State<CartPage> {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      "$totalDiscountPriceFormatted TL",
+                                      NumberFormat.currency(
+                                              locale: 'en_US', symbol: '')
+                                          .format(
+                                        totalDiscountPrice -
+                                            (totalDiscountPrice *
+                                                (discountPercentage / 100)),
+                                      ),
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 14,
@@ -284,6 +307,9 @@ class _CartPageState extends State<CartPage> {
                                   cartProvider
                                       .addSelectedProducts(selectedProducts);
 
+                                  // Clear the cart after placing the order
+                                  cartProvider.clearCart();
+
                                   // Show the Snackbar
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -296,7 +322,7 @@ class _CartPageState extends State<CartPage> {
                                   );
 
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => OrderDetailScreen(),
+                                    builder: (context) => HomePage(),
                                   ));
                                 },
                               ),
@@ -383,14 +409,14 @@ class _CartPageState extends State<CartPage> {
                             const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                "Toplam İndirim Fiyatı",
+                                "Toplam Kampanyalı Fiyatı",
                                 style: TextStyle(fontSize: 15),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                "$generalPriceFormatted TL",
+                                "$totalDiscountPriceFormatted TL",
                                 style: const TextStyle(fontSize: 17),
                               ),
                             ),
@@ -409,14 +435,20 @@ class _CartPageState extends State<CartPage> {
                             const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                "Genel Toplam",
+                                "İskontolu Fiyat",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                "$totalDiscountPriceFormatted TL",
+                                NumberFormat.currency(
+                                        locale: 'en_US', symbol: '')
+                                    .format(
+                                  totalDiscountPrice -
+                                      (totalDiscountPrice *
+                                          (discountPercentage / 100)),
+                                ),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 19,
@@ -465,9 +497,12 @@ class _CartPageState extends State<CartPage> {
                                   cartProvider
                                       .addSelectedProducts(selectedProducts);
 
+                                  // Clear the cart after placing the order
+                                  cartProvider.clearCart();
+
                                   // Show the Snackbar
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
+                                    const SnackBar(
                                       content: Text(
                                           "Sipariş eklendi!"), // Customize the message
                                       duration: Duration(
@@ -477,7 +512,7 @@ class _CartPageState extends State<CartPage> {
                                   );
 
                                   Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => OrderDetailScreen(),
+                                    builder: (context) => HomePage(),
                                   ));
                                 },
                               ),

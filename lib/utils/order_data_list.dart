@@ -1,4 +1,4 @@
-import 'package:hepsiorda/pages/pending_order_page.dart';
+import 'package:hepsiorda/pages/customers.dart';
 
 final List<OrderData> orderDataList = [
   OrderData(customerName: "Ali Koç", phoneNumber: "05061234567"),
@@ -21,11 +21,8 @@ final List<OrderData> orderDataList = [
   OrderData(customerName: "Serkan Yılmaz", phoneNumber: "05068901234"),
   OrderData(customerName: "Ayşegül Çetin", phoneNumber: "05069012345"),
   OrderData(customerName: "Burak Öztürk", phoneNumber: "05060123456"),
-  OrderData(customerName: "Funda Yılmaz", phoneNumber: "05061234567"),
-  OrderData(customerName: "Gökhan Ayhan", phoneNumber: "05062345678"),
   OrderData(customerName: "Gizem Sarı", phoneNumber: "05063456789"),
   OrderData(customerName: "Levent Akçay", phoneNumber: "05064567890"),
-  OrderData(customerName: "Melis Göçmen", phoneNumber: "05065678901"),
   OrderData(customerName: "Berkay Kılıç", phoneNumber: "05066789012"),
   OrderData(customerName: "Merve Çınar", phoneNumber: "05067890123"),
   OrderData(customerName: "Özlem Kuru", phoneNumber: "05068901234"),

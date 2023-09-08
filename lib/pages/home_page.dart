@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/pages/main_page.dart';
-import 'package:hepsiorda/pages/pending_order_page.dart';
+import 'package:hepsiorda/pages/customers.dart';
+import 'package:hepsiorda/pages/pending_orders_screen.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -175,11 +176,18 @@ class HomePage extends StatelessWidget {
                             MaterialPageRoute(builder: (context) => MainPage()),
                           );
                         }
-                        if (index == 3) {
+                        if (index == 1) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PendingOrderScreen()),
+                          );
+                        }
+                        if (index == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PendingOrdersScreen()),
                           );
                         }
                       },

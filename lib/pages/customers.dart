@@ -1,4 +1,3 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:hepsiorda/utils/order_data_list.dart';
 import 'package:hepsiorda/widgets/OrderItem.dart';

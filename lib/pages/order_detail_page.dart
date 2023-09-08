@@ -12,11 +12,8 @@ class OrderDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
-
-    final totalDiscountPrice = cartProvider.getTotalDiscountPrice();
     final totalDiscountPriceFormatted =
-        NumberFormat.currency(locale: 'en_US', symbol: '')
-            .format(totalDiscountPrice);
+        cartProvider.totalDiscountPriceFormatted;
 
     final selectedProducts = cartProvider.selectedProducts;
     return Scaffold(
